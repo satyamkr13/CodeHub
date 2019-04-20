@@ -10,7 +10,8 @@ public class UsersViewModel extends AndroidViewModel {
     private LiveData<PagedList<User>> pagedListLiveData;
     public UsersViewModel(@NonNull Application application) {
         super(application);
-        pagedListLiveData = new UsersRepository().getPagedListLiveData();
+        pagedListLiveData = new GithubRepository(GithubRepository.MODE_HOME)
+                .getPagedListLiveData();
     }
 
     public LiveData<PagedList<User>> getPagedListLiveData() {

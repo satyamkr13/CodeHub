@@ -12,16 +12,16 @@ import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 
-public class MainActivity extends AppCompatActivity implements UsersAdapter.InteractionCallbacks {
-    public static final String USER_NAME = "USER_NAME";
+public class FollowersActivity extends AppCompatActivity implements UsersAdapter.InteractionCallbacks {
     UsersAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_followers);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Setting up recyclerView
         RecyclerView recyclerView = findViewById(R.id.usersRecyclerView);
@@ -29,20 +29,27 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.Inte
         recyclerView.setAdapter(mAdapter);
 
         // Setting up UsersViewModel
-        UsersViewModel usersViewModel = ViewModelProviders.of(this).get(UsersViewModel.class);
-        usersViewModel.getPagedListLiveData().observe(this, new Observer<PagedList<User>>() {
+        FollowersViewModel viewModel = ViewModelProviders.of(this).get(FollowersViewModel.class);
+        viewModel.setUserName(getIntent().getStringExtra(MainActivity.USER_NAME));
+        viewModel.getFollowersListLiveData().observe(this, new Observer<PagedList<User>>() {
             @Override
             public void onChanged(@Nullable PagedList<User> users) {
-                // Submit a new list to paged list adapter.
                 mAdapter.submitList(users);
             }
         });
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        // Go back when Back button pressed in ActionBar
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     public void onUserCardClick(User user) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(USER_NAME, user.getLogin());
+        intent.putExtra(MainActivity.USER_NAME, user.getLogin());
         startActivity(intent);
     }
 }
