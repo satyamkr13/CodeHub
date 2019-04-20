@@ -1,4 +1,4 @@
-package com.instinotices.satyam.codehub;
+package com.instinotices.satyam.codehub.view;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.instinotices.satyam.codehub.R;
+import com.instinotices.satyam.codehub.model.data_types.User;
+import com.instinotices.satyam.codehub.viewmodel.DetailsViewModel;
 
 public class DetailsActivity extends AppCompatActivity {
     User mUser;
@@ -27,12 +30,12 @@ public class DetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         progressView = findViewById(R.id.progressView);
-        if (getIntent().hasExtra(MainActivity.USER_NAME)) {
+        if (getIntent().hasExtra(MainActivity.INTENT_EXTRA_USER_NAME)) {
             DetailsViewModel detailsViewModel = ViewModelProviders
                     .of(this)
                     .get(DetailsViewModel.class);
             detailsViewModel.setUserName(
-                    getIntent().getStringExtra(MainActivity.USER_NAME)
+                    getIntent().getStringExtra(MainActivity.INTENT_EXTRA_USER_NAME)
             );
             detailsViewModel.getUserLiveData().observe(this, new Observer<User>() {
                 @Override
@@ -97,8 +100,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void viewFollowers(View view) {
-        Intent intent = new Intent(this, FollowersActivity.class);
-        intent.putExtra(MainActivity.USER_NAME, mUser.getLogin());
+        Intent intent = new Intent(this, UsersListActivity.class);
+        intent.putExtra(MainActivity.INTENT_EXTRA_USER_NAME, mUser.getLogin());
         startActivity(intent);
     }
 }

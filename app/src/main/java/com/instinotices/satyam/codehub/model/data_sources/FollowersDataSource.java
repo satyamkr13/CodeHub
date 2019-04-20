@@ -1,15 +1,21 @@
-package com.instinotices.satyam.codehub;
+package com.instinotices.satyam.codehub.model.data_sources;
 
 import android.arch.paging.PageKeyedDataSource;
 import android.support.annotation.NonNull;
+
+import com.instinotices.satyam.codehub.model.data_types.User;
 
 import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Response;
 
-import static com.instinotices.satyam.codehub.GithubUsersDataSource.gitHubService;
+import static com.instinotices.satyam.codehub.model.data_sources.AllUsersDataSource.gitHubService;
 
+
+/**
+ * This class acts as a DataSource for providing list of followers of a particular user
+ */
 public class FollowersDataSource extends PageKeyedDataSource<Integer, User> {
     String userName;
 

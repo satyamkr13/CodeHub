@@ -1,8 +1,11 @@
-package com.instinotices.satyam.codehub;
+package com.instinotices.satyam.codehub.model.data_types;
 
+/**
+ * This class is used for storing necessary details about a user.
+ */
 public class User {
-    private String login, avatar_url, url, html_url, name, company, location, email, bio;
-    private int id, followers, following, public_repos;
+    private String login, avatar_url, html_url, name, company, location, email, bio;
+    private int id, followers, following;
 
     public String getLogin() {
         return login;
@@ -14,10 +17,6 @@ public class User {
 
     public String getAvatar_url() {
         return avatar_url;
-    }
-
-    public String getUrl() {
-        return url;
     }
 
     public String getHtml_url() {
@@ -52,7 +51,4 @@ public class User {
         return following;
     }
 
-    public int getPublic_repos() {
-        return public_repos;
-    }
 }

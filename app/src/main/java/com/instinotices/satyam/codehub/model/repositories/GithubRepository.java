@@ -1,7 +1,12 @@
-package com.instinotices.satyam.codehub;
+package com.instinotices.satyam.codehub.model.repositories;
+
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
+
+import com.instinotices.satyam.codehub.model.data_sources.AllUsersDataSource;
+import com.instinotices.satyam.codehub.model.data_sources.GithubDataSourceFactory;
+import com.instinotices.satyam.codehub.model.data_types.User;
 
 public class GithubRepository {
     public final static String MODE_HOME = "mode-home";
@@ -16,7 +21,7 @@ public class GithubRepository {
         this.mode = mode;
         // Set up configurations for our paged list live data object to be created in next line.
         pagedListConfig = new PagedList.Config.Builder()
-                .setPageSize(GithubUsersDataSource.PAGE_SIZE)
+                .setPageSize(AllUsersDataSource.PAGE_SIZE)
                 .setPrefetchDistance(20).build();
 
         if (mode.equals(MODE_HOME)) {
@@ -41,8 +46,16 @@ public class GithubRepository {
         getFollowers();
     }
 
+    private void searchUsers() {
+        // Get an instance of github data source factory
+        githubDataSourceFactory = new GithubDataSourceFactory(MODE_SEARCH, searchQuery);
+        // Generate LiveData<PagedList<User>> from data source factory.
+        pagedListLiveData = new LivePagedListBuilder(githubDataSourceFactory, pagedListConfig).build();
+    }
+
     public void setSearchQuery(String searchQuery) {
         this.searchQuery = searchQuery;
+        searchUsers();
     }
 
     public LiveData<PagedList<User>> getPagedListLiveData() {

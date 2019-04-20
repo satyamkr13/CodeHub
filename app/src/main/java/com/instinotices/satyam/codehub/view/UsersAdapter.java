@@ -1,4 +1,4 @@
-package com.instinotices.satyam.codehub;
+package com.instinotices.satyam.codehub.view;
 
 import android.arch.paging.PagedListAdapter;
 import android.support.annotation.NonNull;
@@ -9,13 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.RequestManager;
+import com.instinotices.satyam.codehub.R;
+import com.instinotices.satyam.codehub.model.data_types.User;
 
 public class UsersAdapter extends PagedListAdapter<User, UsersAdapter.ViewHolder> {
     private InteractionCallbacks mInteractionCallbacks;
     private final RequestManager requestManagerGlide;
 
-    protected UsersAdapter(InteractionCallbacks interactionCallbacks, RequestManager requestManager) {
+    public UsersAdapter(InteractionCallbacks interactionCallbacks, RequestManager requestManager) {
         super(diffUtilItemCallback);
         mInteractionCallbacks = interactionCallbacks;
         requestManagerGlide = requestManager;

@@ -1,4 +1,4 @@
-package com.instinotices.satyam.codehub;
+package com.instinotices.satyam.codehub.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -6,6 +6,9 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
+
+import com.instinotices.satyam.codehub.model.data_sources.AllUsersDataSource;
+import com.instinotices.satyam.codehub.model.data_types.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,7 +33,7 @@ public class DetailsViewModel extends AndroidViewModel {
     }
 
     private void fetchUser(String userName) {
-        GithubUsersDataSource.gitHubService()
+        AllUsersDataSource.gitHubService()
                 .getUser(userName)
                 .enqueue(new Callback<User>() {
                     @Override

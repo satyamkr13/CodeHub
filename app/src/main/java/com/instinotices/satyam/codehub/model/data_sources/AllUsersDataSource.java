@@ -1,8 +1,11 @@
-package com.instinotices.satyam.codehub;
+package com.instinotices.satyam.codehub.model.data_sources;
 
 import android.arch.paging.ItemKeyedDataSource;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import com.instinotices.satyam.codehub.model.data_types.User;
+import com.instinotices.satyam.codehub.model.repositories.GitHubAPI;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,13 +14,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GithubUsersDataSource extends ItemKeyedDataSource<Integer, User> {
+/**
+ * This class acts as a DataSource for providing list of users in home screen
+ */
+public class AllUsersDataSource extends ItemKeyedDataSource<Integer, User> {
     public final static int PAGE_SIZE = 50;
     public static final String BASE_URL = "https://api.github.com/";
 
     /**
-     * @return An instance of GitHubAPI interface whose methods are automatically
-     * implemented by Retrofit library.
+     * @return An instance of GitHubAPI interface (it's abstract methods are automatically
+     * implemented by Retrofit library).
      */
     public static GitHubAPI gitHubService() {
         Retrofit retrofit = new Retrofit.Builder()
