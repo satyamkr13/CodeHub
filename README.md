@@ -7,5 +7,6 @@ You can download this application from https://raw.githubusercontent.com/satyamc
 ## Key technologies
 1. Android Architecture Components: Paging, LiveData, etc.
 2. Retrofit 2
-3. GitHub Open API
-4. Glide library
+3. Material design components
+4. GitHub Open API
+5. Glide library
