@@ -8,6 +8,11 @@ import com.instinotices.satyam.codehub.model.data_sources.AllUsersDataSource;
 import com.instinotices.satyam.codehub.model.data_sources.GithubDataSourceFactory;
 import com.instinotices.satyam.codehub.model.data_types.User;
 
+/**
+ * All the view models in this project use this
+ * repository for getting all different sort of data,
+ * as specified by mode in the constructor of this class.
+ */
 public class GithubRepository {
     public final static String MODE_HOME = "mode-home";
     public final static String MODE_FOLLOWERS = "mode-followers";
@@ -31,7 +36,7 @@ public class GithubRepository {
             // Generate LiveData<PagedList<User>> from data source factory.
             pagedListLiveData = new LivePagedListBuilder(githubDataSourceFactory, pagedListConfig).build();
         }
-        // Otherwise wait for userName or searchQuery.
+        // Otherwise wait for view models to set userName or searchQuery.
     }
 
     private void getFollowers() {

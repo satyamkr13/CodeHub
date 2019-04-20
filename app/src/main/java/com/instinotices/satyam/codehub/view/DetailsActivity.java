@@ -30,19 +30,23 @@ public class DetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         progressView = findViewById(R.id.progressView);
+        // We can show details only if login id of user is passed, otherwise close this activity.
         if (getIntent().hasExtra(MainActivity.INTENT_EXTRA_USER_NAME)) {
+            // Initialise the view model
             DetailsViewModel detailsViewModel = ViewModelProviders
                     .of(this)
                     .get(DetailsViewModel.class);
             detailsViewModel.setUserName(
                     getIntent().getStringExtra(MainActivity.INTENT_EXTRA_USER_NAME)
             );
+            // Observe for changes
             detailsViewModel.getUserLiveData().observe(this, new Observer<User>() {
                 @Override
                 public void onChanged(@Nullable User user) {
                     if (user.getLogin() != null) {
                         mUser = user;
                         displayData();
+                        // Hide the progress bar after loading content
                         progressView.setVisibility(View.GONE);
                     }
                 }
@@ -52,6 +56,10 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method loads data from user object to respective views,
+     * and even hides some views if some data is missing.
+     */
     private void displayData() {
         Glide.with(this)
                 .load(mUser.getAvatar_url())
@@ -92,6 +100,7 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     public void openInGithub(View view) {
+        // Show the user's profile using Chrome Custom Tabs
         Uri url = Uri.parse(mUser.getHtml_url());
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
@@ -101,6 +110,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void viewFollowers(View view) {
         Intent intent = new Intent(this, UsersListActivity.class);
+        // Pass the login id of user whose followers are to be displayed.
         intent.putExtra(MainActivity.INTENT_EXTRA_USER_NAME, mUser.getLogin());
         startActivity(intent);
     }

@@ -1,8 +1,12 @@
 package com.instinotices.satyam.codehub.model.data_sources;
 
 import android.arch.paging.DataSource;
-import android.util.Log;
 
+/**
+ * This class is used for creating data source.
+ * It automatically decides which Data source to use based
+ * on choice of constructor.
+ */
 public class GithubDataSourceFactory extends DataSource.Factory {
     DataSource githubDataSource;
 
@@ -15,7 +19,6 @@ public class GithubDataSourceFactory extends DataSource.Factory {
     }
 
     public GithubDataSourceFactory(String mode, String query) {
-        Log.e("DATA", "Here");
         githubDataSource = new SearchDataSource(query);
     }
 

@@ -19,15 +19,21 @@ public class UsersListViewModel extends AndroidViewModel {
 
     public void setUserName(String mUserName) {
         this.mUserName = mUserName;
+        // Create an instance of Github repository (in followers mode)
         GithubRepository githubRepository = new GithubRepository(GithubRepository.MODE_FOLLOWERS);
+        // Share the user's login with repository
         githubRepository.setUserName(mUserName);
+        // Get back an instance of live data in which updated list of followers will be posted.
         liveData = githubRepository.getPagedListLiveData();
     }
 
     public void setSearchQuery(String searchQuery) {
         mSearchQuery = searchQuery;
+        // Create an instance of Github repository (in search mode)
         GithubRepository githubRepository = new GithubRepository(GithubRepository.MODE_SEARCH);
+        // Share the search query with repository
         githubRepository.setSearchQuery(mSearchQuery);
+        // Get back an instance of live data in which updates to search results will be posted
         liveData = githubRepository.getPagedListLiveData();
     }
 

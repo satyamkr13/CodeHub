@@ -33,12 +33,14 @@ public class DetailsViewModel extends AndroidViewModel {
     }
 
     private void fetchUser(String userName) {
+        // Directly fetching user details by making a GET request using Retrofit
         AllUsersDataSource.gitHubService()
                 .getUser(userName)
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if (response.isSuccessful()) {
+                            // Notify active observers about the new data we've received from network
                             userMutableLiveData.postValue(response.body());
                         } else {
                             Toast.makeText(mApplication, "Bad response from server", Toast.LENGTH_SHORT).show();

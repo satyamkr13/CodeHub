@@ -55,15 +55,18 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.Inte
 
     @Override
     public void onUserCardClick(User user) {
+        // Show details of the user when it's card is clicked.
         Intent intent = new Intent(this, DetailsActivity.class);
+        // Pass the login id of user whose details are to be displayed
         intent.putExtra(INTENT_EXTRA_USER_NAME, user.getLogin());
         startActivity(intent);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate menu
         getMenuInflater().inflate(R.menu.main_menu, menu);
-
+        // Inform searchView to that this menuItem acts as search button
         MenuItem item = menu.findItem(R.id.action_search);
         searchView.setMenuItem(item);
 
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.Inte
 
     @Override
     public void onBackPressed() {
+        // Close the searchView if it is already open, otherwise perform normal back operation
         if (searchView.isSearchOpen()) {
             searchView.closeSearch();
         } else {
@@ -84,7 +88,9 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.Inte
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                // Send a search Intent to UsersListActivity
                 Intent intent = new Intent(MainActivity.this, UsersListActivity.class);
+                // Pass the query through intent as well
                 intent.putExtra(INTENT_EXTRA_SEARCH_QUERY, query);
                 startActivity(intent);
                 return false;

@@ -84,6 +84,10 @@ public class UsersAdapter extends PagedListAdapter<User, UsersAdapter.ViewHolder
         }
     };
 
+    /**
+     * This interface provides interaction callbacks
+     * like clicks to classes which implement this interface.
+     */
     public interface InteractionCallbacks{
         void onUserCardClick(User user);
     }

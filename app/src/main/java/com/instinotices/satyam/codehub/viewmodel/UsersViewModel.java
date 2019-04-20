@@ -13,6 +13,8 @@ public class UsersViewModel extends AndroidViewModel {
     private LiveData<PagedList<User>> pagedListLiveData;
     public UsersViewModel(@NonNull Application application) {
         super(application);
+        // Create an instance of Github repository, and get back instance of live data
+        // where list of users will be posted when network request if complete.
         pagedListLiveData = new GithubRepository(GithubRepository.MODE_HOME)
                 .getPagedListLiveData();
     }
