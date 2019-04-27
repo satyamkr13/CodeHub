@@ -10,3 +10,10 @@ You can download this application from https://raw.githubusercontent.com/satyamc
 3. Material design components
 4. GitHub Open API
 5. Glide library
+
+## Screenshots
+
+<img src="https://raw.githubusercontent.com/satyamcse/CodeHub/master/graphics/Slide7.PNG" width="300">         <img src="https://raw.githubusercontent.com/satyamcse/CodeHub/master/graphics/Slide6.PNG" width="300"> 
+
+<img src="https://raw.githubusercontent.com/satyamcse/CodeHub/master/graphics/Slide4.PNG" width="300">  <img src="https://raw.githubusercontent.com/satyamcse/CodeHub/master/graphics/Slide5.PNG" width="300">
+
